@@ -92,7 +92,7 @@ export const CHRONOS_DEFAULT_CSS = `
 
 .vis-custom-time,
 .vis-custom-time-marker {
-  color: var(--chronos-bg-secondary) !important;
+  color: var(--chronos-text-on-accent) !important;
   background-color: var(--chronos-text-normal) !important;
 }
 
