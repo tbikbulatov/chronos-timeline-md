@@ -12,6 +12,7 @@ export default defineConfig([
     treeshake: true,
     noExternal: ["vis-timeline"],
     outDir: "dist",
+    outExtension: () => ({ js: ".js" }),
     target: "es2020",
     // Ensure proper ESM output
     platform: "browser",

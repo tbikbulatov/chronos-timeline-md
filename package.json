@@ -2,7 +2,7 @@
   "name": "chronos-timeline-md",
   "version": "1.0.7",
   "description": "Render interactive timelines from simple markdown",
-  "main": "dist/cjs-entry.cjs",
+  "main": "index.js",
   "module": "dist/index.js",
   "browser": "dist/iife-entry.global.js",
   "types": "dist/index.d.ts",
@@ -22,10 +22,12 @@
   },
   "files": [
     "dist",
+    "index.js",
     "README.md"
   ],
   "scripts": {
-    "build": "tsup",
+    "build": "tsup && npm run fix-dts",
+    "fix-dts": "if [ -f dist/index.d.mts ]; then mv dist/index.d.mts dist/index.d.ts; fi",
     "dev": "tsup --watch",
     "clean": "rm -rf dist",
     "playground": "node serve.cjs",
@@ -50,7 +52,6 @@
   "bugs": {
     "url": "https://github.com/clairefro/chronos-timeline-md/issues"
   },
-  "type": "module",
   "devDependencies": {
     "@types/node": "^20.0.0",
     "tsup": "^8.5.0",
