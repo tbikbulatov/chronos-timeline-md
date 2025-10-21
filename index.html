@@ -1232,7 +1232,9 @@
             envIndicator.style.display = "none";
             console.log("GitHub Pages detected - loading from CDN...");
 
-            updateLoadingStatus("Loading Chronos Timeline library...");
+            updateLoadingStatus(
+              "Updating to latest Chronos Timeline library..."
+            );
             chronosLibrary = await loadChronosLibrary();
           } else {
             // Other hosting - try CDN first with enhanced loading, then fallback to local
