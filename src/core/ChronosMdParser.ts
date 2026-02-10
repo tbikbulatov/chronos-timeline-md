@@ -77,7 +77,7 @@ export class ChronosMdParser {
     const descriptionP = `(\\|\\s*(?<!\\[\\[[^\\]]*)\\s*(.*))?`;
 
     const re = new RegExp(
-      `${itemTypeP}${optSp}\\[${optSp}${dateP}?${optSp}${separatorP}${optSp}${dateP}?${optSp}\\]${optSp}${colorP}${optSp}${groupP}${optSp}${contentP}${optSp}${descriptionP}$`
+      `${itemTypeP}${optSp}\\[${optSp}${dateP}?${optSp}${separatorP}${optSp}${dateP}?${optSp}\\]${optSp}${colorP}${optSp}${groupP}${optSp}${contentP}${optSp}${descriptionP}$`,
     );
 
     const match = line.match(re);
@@ -155,7 +155,7 @@ export class ChronosMdParser {
     if (color) {
       style += `background-color: ${this._mapToThemeColor(
         color as Color,
-        type === "background" ? Opacity.Opaque : Opacity.Solid
+        type === "background" ? Opacity.Opaque : Opacity.Solid,
       )};`;
     }
 
@@ -234,7 +234,7 @@ export class ChronosMdParser {
           color,
           lineNumber,
           type: "background",
-        })
+        }),
       );
     }
   }
@@ -303,14 +303,14 @@ export class ChronosMdParser {
         if (!flagContent.length) {
           this._addParserError(
             lineNumber,
-            `Missing dates in DEFAULTVIEW flag: ${line}`
+            `Missing dates in DEFAULTVIEW flag: ${line}`,
           );
           return;
         }
         if (flagContent.length < 2) {
           this._addParserError(
             lineNumber,
-            `Must provide a start and end date for DEFAULTVIEW flag in format start|end: ${line}`
+            `Must provide a start and end date for DEFAULTVIEW flag in format start|end: ${line}`,
           );
           return;
         }
@@ -320,7 +320,7 @@ export class ChronosMdParser {
             toUTCDate(flagContent[0]).toISOString().split("T")[0],
             toUTCDate(flagContent[1]).toISOString().split("T")[0],
             "~",
-            lineNumber
+            lineNumber,
           );
 
           this.flags.defaultView = {
@@ -334,11 +334,14 @@ export class ChronosMdParser {
       case "notoday":
         this.flags.noToday = true;
         break;
+      case "nostack":
+        this.flags.noStack = true;
+        break;
       case "height":
         if (!flagContent.length) {
           this._addParserError(
             lineNumber,
-            `Must provide number of pixels for HEIGHT flag (ex: 500): ${line}`
+            `Must provide number of pixels for HEIGHT flag (ex: 500): ${line}`,
           );
           return;
         }
@@ -346,14 +349,14 @@ export class ChronosMdParser {
         if (arg.match(/\s/)) {
           this._addParserError(
             lineNumber,
-            `Must provide a single number (of pixels) for HEIGHT flag (ex: 500): ${line}`
+            `Must provide a single number (of pixels) for HEIGHT flag (ex: 500): ${line}`,
           );
           return;
         }
         if (isNaN(Number(arg))) {
           this._addParserError(
             lineNumber,
-            `Must provide a number (of pixels) for HEIGHT flag (ex: 500): ${line}`
+            `Must provide a number (of pixels) for HEIGHT flag (ex: 500): ${line}`,
           );
           return;
         }
@@ -481,7 +484,7 @@ export class ChronosMdParser {
   private _ensureChronologicalDates(
     start: string,
     end: string | undefined,
-    lineNumber: number
+    lineNumber: number,
   ) {
     if (start && end) {
       const startDate = toUTCDate(start);
@@ -489,7 +492,7 @@ export class ChronosMdParser {
       if (startDate > endDate) {
         this._addParserError(
           lineNumber,
-          `Start date (${start}) is after end date (${end}).`
+          `Start date (${start}) is after end date (${end}).`,
         );
       }
     }
@@ -497,7 +500,7 @@ export class ChronosMdParser {
 
   private _ensureCorrectDateSeparator(
     separator: string,
-    lineNumber: number
+    lineNumber: number,
   ): void {
     if (separator !== "~") {
       const msg = `Invalid date separator "${separator}". Dates in a range must be separated by a tilde (~).`;
@@ -517,7 +520,7 @@ export class ChronosMdParser {
     start: string,
     end: string | undefined,
     separator: string | undefined,
-    lineNumber: number
+    lineNumber: number,
   ) {
     this._validateDate(start, lineNumber);
     end && this._validateDate(end, lineNumber);

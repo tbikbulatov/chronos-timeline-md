@@ -60,7 +60,7 @@ export class ChronosTimeline {
 
   constructor(
     containerOrOptions: HTMLElement | ChronosTimelineConstructor,
-    optionsOrUndefined?: ChronosPluginSettings
+    optionsOrUndefined?: ChronosPluginSettings,
   ) {
     // Support both constructor signatures:
     // new ChronosTimeline(container, options)
@@ -124,7 +124,7 @@ export class ChronosTimeline {
         if (disableDefaultStyles) {
           if (cssVars) {
             const existingCustomStyle = doc.querySelector(
-              'style[data-chronos-custom="1"]'
+              'style[data-chronos-custom="1"]',
             );
             if (!existingCustomStyle) {
               const style = doc.createElement("style");
@@ -138,7 +138,7 @@ export class ChronosTimeline {
           }
         } else {
           const existingStyle = doc.querySelector(
-            'style[data-chronos-core="1"]'
+            'style[data-chronos-core="1"]',
           );
           if (!existingStyle) {
             const style = doc.createElement("style");
@@ -164,7 +164,7 @@ export class ChronosTimeline {
   static render(
     container: HTMLElement,
     source: string,
-    options?: ChronosPluginSettings
+    options?: ChronosPluginSettings,
   ): ChronosTimeline {
     const timeline = new ChronosTimeline(container, options);
     timeline.render(source);
@@ -175,7 +175,7 @@ export class ChronosTimeline {
     try {
       const { items, markers, groups, flags } = this.parser.parse(
         source,
-        this.settings
+        this.settings,
       );
       this._renderFromResult({ items, markers, groups, flags });
     } catch (error) {
@@ -246,7 +246,7 @@ export class ChronosTimeline {
         if (disableDefaultStyles) {
           if (cssVars) {
             const existingCustomStyle = doc.querySelector(
-              'style[data-chronos-custom="1"]'
+              'style[data-chronos-custom="1"]',
             );
             if (!existingCustomStyle) {
               const style = doc.createElement("style");
@@ -260,7 +260,7 @@ export class ChronosTimeline {
           }
         } else {
           const existingStyle = doc.querySelector(
-            'style[data-chronos-core="1"]'
+            'style[data-chronos-core="1"]',
           );
           if (!existingStyle) {
             const style = doc.createElement("style");
@@ -302,6 +302,9 @@ export class ChronosTimeline {
     if (flags?.noToday) {
       options.showCurrentTime = false;
     }
+    if (flags?.noStack) {
+      options.stack = false;
+    }
     if (flags?.height) {
       options.height = `${flags.height}px`;
       options.verticalScroll = true;
@@ -310,7 +313,7 @@ export class ChronosTimeline {
     // Apply cssRootClass to the visible container element if provided
     if (this.cssRootClass) {
       const containerEl = this.container.querySelector(
-        ".chronos-timeline-container"
+        ".chronos-timeline-container",
       ) as HTMLElement | null;
       if (containerEl) {
         containerEl.classList.add(this.cssRootClass);
@@ -350,20 +353,20 @@ export class ChronosTimeline {
   private _createTimeline(
     items: ChronosDataItem[],
     groups: Group[] = [],
-    options: TimelineOptions
+    options: TimelineOptions,
   ): Timeline {
     let timeline: Timeline;
     if (groups.length) {
       const { updatedItems, updatedGroups } = this.assignItemsToGroups(
         items,
-        groups
+        groups,
       );
       this.items = updatedItems;
       timeline = new Timeline(
         this.container,
         updatedItems,
         this._createDataGroups(updatedGroups),
-        options
+        options,
       );
     } else {
       timeline = new Timeline(this.container, items, options);
@@ -415,7 +418,7 @@ export class ChronosTimeline {
               this._showTooltipForItem(
                 itemId,
                 e.target as HTMLElement,
-                itemsDataSet
+                itemsDataSet,
               );
             });
 
@@ -431,14 +434,14 @@ export class ChronosTimeline {
   private _showTooltipForItem(
     itemId: string,
     targetElement: HTMLElement,
-    itemsDataSet: any
+    itemsDataSet: any,
   ) {
     const item = itemsDataSet.get(itemId) as unknown as ChronosDataSetDataItem;
     if (item) {
       const text = `${item.content} (${smartDateRange(
         item.start.toISOString(),
         item.end?.toISOString() ?? null,
-        this.settings.selectedLocale
+        this.settings.selectedLocale,
       )})${item.cDescription ? " \n " + item.cDescription : ""}`;
 
       // Find the actual timeline item element for better targeting
@@ -529,7 +532,7 @@ export class ChronosTimeline {
 
   private _createDataGroups(rawGroups: Group[]) {
     return new DataSet<Group>(
-      rawGroups.map((g) => ({ id: g.id, content: g.content }))
+      rawGroups.map((g) => ({ id: g.id, content: g.content })),
     );
   }
 
@@ -544,11 +547,11 @@ export class ChronosTimeline {
     const zoomFactor = 1.02;
     const newStart = new Date(
       range.start.valueOf() -
-        ((range.end.valueOf() - range.start.valueOf()) * (zoomFactor - 1)) / 2
+        ((range.end.valueOf() - range.start.valueOf()) * (zoomFactor - 1)) / 2,
     );
     const newEnd = new Date(
       range.end.valueOf() +
-        ((range.end.valueOf() - range.start.valueOf()) * (zoomFactor - 1)) / 2
+        ((range.end.valueOf() - range.start.valueOf()) * (zoomFactor - 1)) / 2,
     );
 
     timeline.setWindow(newStart, newEnd, { animation: true });

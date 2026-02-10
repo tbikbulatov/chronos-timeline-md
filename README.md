@@ -57,7 +57,7 @@ const markdownSource = `
 
 ChronosTimeline.render(
   document.getElementById("timeline-container"),
-  markdownSource
+  markdownSource,
 );
 ```
 
@@ -95,7 +95,7 @@ timeline.render(markdownSource);
 
       ChronosTimeline.render(
         document.getElementById("timeline-container"),
-        markdownSource
+        markdownSource,
       );
     </script>
   </body>
@@ -220,12 +220,14 @@ For complete syntax documentation, see **[CHRONOS_SYNTAX_GUIDE.md](./CHRONOS_SYN
 - [2023] #blue {Authors} Combined | Description
 
 # Flags
+```
 
 > ORDERBY start
 > DEFAULTVIEW 2020|2025
 > NOTODAY
 > HEIGHT 400
-```
+
+````
 
 ## Configuration Options
 
@@ -248,7 +250,7 @@ interface CoreParseOptions {
   cssVars?: Record<string, string>;
   cssRootClass?: string;
 }
-```
+````
 
 ## Examples
 

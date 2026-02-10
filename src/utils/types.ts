@@ -58,6 +58,7 @@ export type Flags = {
   defaultView?: { start?: string; end?: string };
   noToday?: boolean;
   height?: number;
+  noStack?: boolean;
 };
 
 export interface ParseResult {
