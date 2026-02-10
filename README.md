@@ -203,31 +203,38 @@ const highlighted = ui.highlightChronosText(markdownSource, hljs);
 
 For complete syntax documentation, see **[CHRONOS_SYNTAX_GUIDE.md](./CHRONOS_SYNTAX_GUIDE.md)**
 
-```markdown
 # Basic syntax
 
+```
 - [2023] Event
 - [2023-06-15] Event with description | Details here
   @ [2020~2025] Background period
 
 * [2023-06-15] Point in time
   = [2023-01-01] Important marker
+```
 
 # With modifiers
 
+```
 - [2023] #red Colored event
 - [2023] {Group} Grouped event
 - [2023] #blue {Authors} Combined | Description
+```
 
 # Flags
+
+Can be placed anywhere in your chronos markdown, on its own line
+
 ```
 
 > ORDERBY start
 > DEFAULTVIEW 2020|2025
 > NOTODAY
+> NOSTACK
 > HEIGHT 400
 
-````
+```
 
 ## Configuration Options
 
@@ -250,7 +257,7 @@ interface CoreParseOptions {
   cssVars?: Record<string, string>;
   cssRootClass?: string;
 }
-````
+```
 
 ## Examples
 
