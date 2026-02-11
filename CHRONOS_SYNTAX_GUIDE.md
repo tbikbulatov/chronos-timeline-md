@@ -310,6 +310,17 @@ If needed, you can vertically scroll your timleline by clicking and dragging up 
 
 ![height example](./docs/ex-height.gif)
 
+### NOSTACK flag
+
+```sh
+> NOSTACK
+
+- [2021~2022] foo
+- [2022~2023] bar
+```
+
+NOTE: `NOSTACK` is all or nothing at the moment, due to how the underlying library works. Overlapping items will override eachother on the same line.
+
 ### ORDERBY flag
 
 By default, Chronos ordering is set by the stacking of the elements in the timeline.

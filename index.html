@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -126,12 +126,14 @@
       }
 
       body {
-        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
-          sans-serif;
+        font-family:
+          -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
         height: 100vh;
         background: var(--bg-primary);
         color: var(--text-primary);
-        transition: background-color 0.3s ease, color 0.3s ease;
+        transition:
+          background-color 0.3s ease,
+          color 0.3s ease;
       }
 
       a {
@@ -264,7 +266,8 @@
         height: 20px;
         background: var(--text-secondary);
         border-radius: 1px;
-        box-shadow: -2px 0 0 var(--text-secondary),
+        box-shadow:
+          -2px 0 0 var(--text-secondary),
           2px 0 0 var(--text-secondary);
       }
 
@@ -789,7 +792,8 @@
           height: 4px;
           background: var(--text-secondary);
           border-radius: 1px;
-          box-shadow: 0 -2px 0 var(--text-secondary),
+          box-shadow:
+            0 -2px 0 var(--text-secondary),
             0 2px 0 var(--text-secondary);
           z-index: 11;
           pointer-events: none;
@@ -1266,7 +1270,7 @@
             console.log("GitHub Pages detected - loading from CDN...");
 
             updateLoadingStatus(
-              "Updating to latest Chronos Timeline library..."
+              "Updating to latest Chronos Timeline library...",
             );
             chronosLibrary = await loadChronosLibrary();
           } else {
@@ -1275,7 +1279,7 @@
 
             try {
               updateLoadingStatus(
-                "Loading Chronos Timeline library from CDN..."
+                "Loading Chronos Timeline library from CDN...",
               );
               chronosLibrary = await loadChronosLibrary();
             } catch (cdnError) {
@@ -1288,13 +1292,13 @@
 
                 if (!chronosLibrary) {
                   throw new Error(
-                    "Local file loaded but ChronosTimeline not found"
+                    "Local file loaded but ChronosTimeline not found",
                   );
                 }
                 console.log("Local fallback successful!");
               } catch (localError) {
                 throw new Error(
-                  `Both CDN and local loading failed. CDN: ${cdnError.message}, Local: ${localError.message}`
+                  `Both CDN and local loading failed. CDN: ${cdnError.message}, Local: ${localError.message}`,
                 );
               }
             }
@@ -1339,7 +1343,7 @@
                 } catch (error) {
                   console.warn(
                     "Library syntax highlighting failed, using fallback:",
-                    error
+                    error,
                   );
                   originalUpdateSyntaxHighlighting();
                 }
@@ -1349,7 +1353,7 @@
             };
           } else {
             console.log(
-              "Library syntax highlighting not available, using built-in fallback..."
+              "Library syntax highlighting not available, using built-in fallback...",
             );
           }
           initializeApp({
@@ -1409,7 +1413,7 @@
 
             if (retries > 0) {
               console.log(
-                `Retrying in ${delay}ms... (${retries} attempts left)`
+                `Retrying in ${delay}ms... (${retries} attempts left)`,
               );
               setTimeout(() => {
                 loadScript(src, retries - 1, delay * 2)
@@ -1419,8 +1423,8 @@
             } else {
               reject(
                 new Error(
-                  `Failed to load script after multiple attempts: ${src}`
-                )
+                  `Failed to load script after multiple attempts: ${src}`,
+                ),
               );
             }
           };
@@ -1449,7 +1453,7 @@
             console.log(
               `Attempting to load from CDN ${i + 1}/${
                 cdnSources.length
-              }: ${src}`
+              }: ${src}`,
             );
             await loadScript(src, isLastAttempt ? 3 : 1, 1000);
 
@@ -1459,7 +1463,7 @@
               return window.ChronosTimeline;
             } else {
               throw new Error(
-                "Library loaded but ChronosTimeline not found on window object"
+                "Library loaded but ChronosTimeline not found on window object",
               );
             }
           } catch (error) {
@@ -1467,7 +1471,7 @@
 
             if (isLastAttempt) {
               throw new Error(
-                `All CDN sources failed. Last error: ${error.message}`
+                `All CDN sources failed. Last error: ${error.message}`,
               );
             }
             // Continue to next CDN
@@ -1530,7 +1534,7 @@
         const snippetsSelect = document.getElementById("snippets-select");
         const exportPngBtn = document.getElementById("export-png-btn");
         const transparentBgCheckbox = document.getElementById(
-          "transparent-bg-checkbox"
+          "transparent-bg-checkbox",
         );
         const shareLinkBtn = document.getElementById("share-link-btn");
         const exportStatus = document.getElementById("export-status");
@@ -1634,7 +1638,7 @@
             const totalHeight = containerRect.height;
             const topPercent = Math.max(
               25,
-              Math.min(75, (mouseY / totalHeight) * 100)
+              Math.min(75, (mouseY / totalHeight) * 100),
             );
 
             // Apply new heights
@@ -1649,7 +1653,7 @@
             const totalWidth = containerRect.width - 8; // Subtract divider width
             const leftPercent = Math.max(
               20,
-              Math.min(80, (mouseX / containerRect.width) * 100)
+              Math.min(80, (mouseX / containerRect.width) * 100),
             );
             const rightPercent = 100 - leftPercent;
 
@@ -1736,7 +1740,7 @@
             // Load locale if present
             if (locale && localeSelect) {
               const option = localeSelect.querySelector(
-                `option[value="${locale}"]`
+                `option[value="${locale}"]`,
               );
               if (option) {
                 localeSelect.value = locale;
@@ -1780,7 +1784,7 @@
                 window.location.search.match(/[?&]content=([^&]*)/);
               if (matches && matches[1]) {
                 const content = decodeURIComponent(
-                  matches[1].replace(/\+/g, " ")
+                  matches[1].replace(/\+/g, " "),
                 );
                 markdownInput.value = content;
                 return true;
@@ -1938,6 +1942,16 @@
 - [2024] AGI`,
           },
           {
+            title: "Don't stack items",
+            content: `> NOSTACK
+# Note: NOSTACK is all or nothing... overlapping items will override eachother
+
+- [2019~2021] {Group A} baz
+- [2021~2022] #red {Group A}  foo
+- [2021~2022] {Group B} bar
+- [2022~2025] #red {Group B} bam`,
+          },
+          {
             title: "Advanced: Cold War Timeline",
             content: `- [1945-07-17] {Europe} Potsdam Conference | where post-WWII Europe is divided
 - [1947-03-12] {USA} Truman Doctrine | committing the U.S. to containing communism
@@ -2042,6 +2056,10 @@
                 content: "> NOTODAY",
               },
               {
+                title: "Don't stack items",
+                content: "> NOSTACK",
+              },
+              {
                 title: "Set timeline height",
                 content: "> HEIGHT 400",
               },
@@ -2075,7 +2093,7 @@
 
           const [categoryName, itemIndex] = selectedValue.split("|");
           const category = chronosSnippets.find(
-            (cat) => cat.category === categoryName
+            (cat) => cat.category === categoryName,
           );
           if (!category) return;
 
@@ -2086,7 +2104,7 @@
           const cursorPosition = markdownInput.selectionStart;
           const textBefore = markdownInput.value.substring(0, cursorPosition);
           const textAfter = markdownInput.value.substring(
-            markdownInput.selectionEnd
+            markdownInput.selectionEnd,
           );
 
           // Check if we need to add newlines
@@ -2217,7 +2235,7 @@
 
             // Check if there are parse errors first
             const hasErrors = timelineContainer.querySelector(
-              ".chronos-error-message-container"
+              ".chronos-error-message-container",
             );
 
             if (hasErrors) {
@@ -2311,9 +2329,7 @@
             exportPngBtn.disabled = true;
 
             // Create a canvas from the timeline container
-            import(
-              "https://unpkg.com/html2canvas@1.4.1/dist/html2canvas.esm.js"
-            )
+            import("https://unpkg.com/html2canvas@1.4.1/dist/html2canvas.esm.js")
               .then(({ default: html2canvas }) => {
                 const timelineElement =
                   timelineContainer.querySelector(".vis-timeline");
